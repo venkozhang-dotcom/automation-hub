@@ -1,12 +1,12 @@
 {
   "name": "Automation Hub",
-  "description": "通用自动化环境：夸克/阿里云盘 API、文件下载上传、定时任务等",
+  "description": "通用自动化环境：云盘 API、媒体处理、Web 抓取、数据分析、文档生成、通知推送",
   "preinstalled_packages": {
     "python_version": "3.12",
     "node_version": "20"
   },
   "runtime_config": {
-    "install": "pip install requests httpx yt-dlp ffmpeg-python",
+    "install": "pip install requests httpx aiohttp aiofiles beautifulsoup4 lxml parsel yt-dlp ffmpeg-python pillow pandas openpyxl xlsxwriter python-dotenv pyyaml toml markdown jinja2 rich click typer && apt-get update -qq && apt-get install -y -qq jq ffmpeg 2>/dev/null || true",
     "start": "",
     "terminals": []
   },
@@ -14,12 +14,23 @@
     "QUARK_COOKIE": "<在 TRAE Work 设置中填入>",
     "ALIPAN_REFRESH_TOKEN": "<在 TRAE Work 设置中填入>",
     "ALIPAN_DRIVE_ID": "<在 TRAE Work 设置中填入>",
-    "ALIPAN_USER_ID": "<在 TRAE Work 设置中填入>"
+    "ALIPAN_USER_ID": "<在 TRAE Work 设置中填入>",
+    "GITHUB_TOKEN": "<可选：GitHub Personal Access Token>",
+    "WEBHOOK_URL": "<可选：飞书/钉钉/Slack Webhook 地址>"
   },
   "environment_variables": {
+    "TZ": "Asia/Shanghai",
+    "LANG": "en_US.UTF-8",
+    "PYTHONUNBUFFERED": "1",
     "DOWNLOAD_DIR": "/tmp/downloads",
+    "WORKSPACE_DIR": "/workspace",
     "QUARK_API_BASE": "https://drive-pc.quark.cn",
     "ALIPAN_API_BASE": "https://api.aliyundrive.com",
-    "ALIPAN_TARGET_FOLDER_NAME": "影视"
+    "ALIPAN_TARGET_FOLDER_NAME": "影视",
+    "GITHUB_API_BASE": "https://api.github.com",
+    "GITHUB_REPO": "venkozhang-dotcom/automation-hub",
+    "MAX_UPLOAD_PART_SIZE": "1073741824",
+    "HTTP_TIMEOUT": "30",
+    "RETRY_COUNT": "3"
   }
 }
