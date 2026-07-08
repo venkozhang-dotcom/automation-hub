@@ -1,0 +1,36 @@
+# 凭证与配置（绝不提交）
+.env
+*.cookie
+*.token
+credentials.json
+secrets/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# 下载文件
+downloads/
+*.mkv
+*.mp4
+*.avi
+*.torrent
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# 临时文件
+*.bak
+*.tmp
+*.log
