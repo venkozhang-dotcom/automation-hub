@@ -3,7 +3,7 @@
 > **标签：** #reference #工具 #方法论 #ai
 
 > **用途：** 将此文档复制到新 TRAE 会话，让 TRAE 快速理解你的完整工作流、配置细节和当前状态。
-> **最后更新：** 2026-07-09 Session 4（云端会话上下文获取 + 笔记自动同步仓库机制）
+> **最后更新：** 2026-07-09 Session 5（项目记忆写入笔记更新流程 + 云端 git pull 经验）
 > **用户环境：** macOS（zhanghuiqiang@venko-2），zsh，中国网络环境
 > **会话模式：** TRAE Work 桌面版 Code 模式（本地会话为主）
 
@@ -698,6 +698,17 @@ automation-hub/
 | 凭证 | Automation Hub 敏感变量（自动注入 os.environ） |
 | 依赖 | install 脚本自动安装 |
 | 项目记忆 `~/.trae-cn/memory/` | 云端不可访问，需在对话中口头说明 |
+| 笔记更新流程 | 已写入项目记忆 project_memory.md，新本地会话可直接执行「更新笔记」 |
+
+### 云端会话 git pull 经验
+
+云端会话 clone 仓库时可能拿到旧版本，导致 `docs/brain-notes/workflow-v3.md` 不存在。解决方法：
+
+```bash
+git pull origin main
+```
+
+拉取最新代码后即可读取。新会话开局建议先执行 `git pull` 确保仓库是最新的。
 
 ### 云端新会话提示词
 
@@ -807,6 +818,8 @@ automation-hub/
 | 敏感/环境变量分类 | ✅ 已修正 | 凭证放敏感变量，配置放环境变量（见 §7.5） |
 | 云端上下文获取 | ✅ 已解决 | workflow-v3.md 同步至仓库 docs/brain-notes/，云端 clone 后可读 |
 | 笔记自动同步 | ✅ 已建立 | 更新 Obsidian 笔记时自动复制到仓库并 git push |
+| 项目记忆写入更新流程 | ✅ 已完成 | project_memory.md 记录 5 步流程 + 关键路径，新本地会话可直接执行 |
+| 云端 git pull 经验 | ✅ 已验证 | clone 可能拿到旧版本，需 git pull origin main 获取最新 |
 
 ---
 
