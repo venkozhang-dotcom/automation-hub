@@ -3,7 +3,7 @@
 > **标签：** #reference #工具 #方法论 #ai
 
 > **用途：** 将此文档复制到新 TRAE 会话，让 TRAE 快速理解你的完整工作流、配置细节和当前状态。
-> **最后更新：** 2026-07-09 Session 5（项目记忆写入笔记更新流程 + 云端 git pull 经验）
+> **最后更新：** 2026-07-09 Session 6（笔记双向同步机制：云端→本地反向同步）
 > **用户环境：** macOS（zhanghuiqiang@venko-2），zsh，中国网络环境
 > **会话模式：** TRAE Work 桌面版 Code 模式（本地会话为主）
 
@@ -710,6 +710,18 @@ git pull origin main
 
 拉取最新代码后即可读取。新会话开局建议先执行 `git pull` 确保仓库是最新的。
 
+### 笔记双向同步机制
+
+笔记同步是双向的，确保本地 Obsidian 和 GitHub 仓库始终保持一致：
+
+| 场景 | 方向 | 流程 |
+|---|---|---|
+| 本地会话更新笔记 | 本地 → 仓库 | Obsidian → 复制到仓库 → git push |
+| 云端会话更新笔记 | 仓库 → GitHub | 直接改仓库文件 → git push（本地 Obsidian 不会自动更新） |
+| 本地会话启动 | 仓库 → 本地 | `cp ~/Documents/automation-hub/docs/brain-notes/workflow-v3.md ~/brain/notes/hermes-obsidian-gbrain-trae-workflow-v3.md` |
+
+**关键规则：** 新本地会话启动时，自动检查仓库笔记是否比本地新，如果是则从仓库同步到 Obsidian。此规则已写入 `project_memory.md`。
+
 ### 云端新会话提示词
 
 ```
@@ -820,6 +832,7 @@ git pull origin main
 | 笔记自动同步 | ✅ 已建立 | 更新 Obsidian 笔记时自动复制到仓库并 git push |
 | 项目记忆写入更新流程 | ✅ 已完成 | project_memory.md 记录 5 步流程 + 关键路径，新本地会话可直接执行 |
 | 云端 git pull 经验 | ✅ 已验证 | clone 可能拿到旧版本，需 git pull origin main 获取最新 |
+| 笔记双向同步 | ✅ 已建立 | 本地→仓库（push）+ 仓库→本地（启动时 cp），见 §8补三 |
 
 ---
 
