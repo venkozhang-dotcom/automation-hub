@@ -3,7 +3,7 @@
 > **标签：** #reference #工具 #方法论 #ai
 
 > **用途：** 将此文档复制到新 TRAE 会话，让 TRAE 快速理解你的完整工作流、配置细节和当前状态。
-> **最后更新：** 2026-07-09 Session 3（本地凭证体系 + GitHub 仓库 + 云端沙箱全面扩展 + 敏感/环境变量分类修正）
+> **最后更新：** 2026-07-09 Session 4（云端会话上下文获取 + 笔记自动同步仓库机制）
 > **用户环境：** macOS（zhanghuiqiang@venko-2），zsh，中国网络环境
 > **会话模式：** TRAE Work 桌面版 Code 模式（本地会话为主）
 
@@ -678,6 +678,42 @@ automation-hub/
 
 **注意：** 仓库不包含凭证（`.env` 被 `.gitignore` 排除）。云端凭证通过 TRAE Work 敏感变量注入，不依赖仓库。手机端默认沙箱无凭证注入能力。
 
+
+---
+
+## 八补三、云端会话上下文获取与笔记同步（2026-07-09）
+
+### 问题
+
+云端沙箱是独立容器，无法访问本地 `~/brain/notes/` 和 `~/.trae-cn/memory/`。云端新会话缺少项目历史和配置上下文。
+
+### 解决方案
+
+将 workflow-V3 笔记同步到 GitHub 仓库，云端会话 clone 后可读取。
+
+| 信息来源 | 云端会话获取方式 |
+|---|---|
+| workflow-V3 笔记 | 仓库 `docs/brain-notes/workflow-v3.md`（git clone 后可读） |
+| API 调研笔记 | 仓库 `docs/api-notes.md`（git clone 后可读） |
+| 凭证 | Automation Hub 敏感变量（自动注入 os.environ） |
+| 依赖 | install 脚本自动安装 |
+| 项目记忆 `~/.trae-cn/memory/` | 云端不可访问，需在对话中口头说明 |
+
+### 云端新会话提示词
+
+```
+请先阅读 docs/brain-notes/workflow-v3.md 了解项目背景和配置
+```
+
+### 笔记自动同步机制
+
+更新 Obsidian 笔记时，同一个流程中自动完成三步：
+1. 更新 `~/brain/notes/hermes-obsidian-gbrain-trae-workflow-v3.md`
+2. 复制到 `~/Documents/automation-hub/docs/brain-notes/workflow-v3.md`
+3. `git commit && git push`
+
+本地 Obsidian 是主副本，仓库是云端可读的副本。用户说"更新笔记"即触发完整流程。
+
 ---
 
 ## 九、完整工作流示例
@@ -769,6 +805,8 @@ automation-hub/
 | GitHub 仓库 | ✅ 已创建 | venkozhang-dotcom/automation-hub（私有），SSH key 已配置（见 §8补二） |
 | 云端沙箱扩展 | ✅ 已完成 | 18 Python 包 + jq + ffmpeg，4 敏感变量 + 15 环境变量（见 §7.5） |
 | 敏感/环境变量分类 | ✅ 已修正 | 凭证放敏感变量，配置放环境变量（见 §7.5） |
+| 云端上下文获取 | ✅ 已解决 | workflow-v3.md 同步至仓库 docs/brain-notes/，云端 clone 后可读 |
+| 笔记自动同步 | ✅ 已建立 | 更新 Obsidian 笔记时自动复制到仓库并 git push |
 
 ---
 
