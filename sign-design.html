@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>百川 Bar The Ocean — 招牌 redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+SC:wght@200;300;400;600;700;900&family=Noto+Sans+SC:wght@100;300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5A3;
+    --gold-dark: #8B6914;
+    --gold-bright: #FFD700;
+    --black: #0A0A0A;
+    --black-soft: #1A1A1A;
+    --black-panel: #111111;
+    --bg: #050505;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: #fff;
+    font-family: 'Noto Sans SC', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+  .header h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 200;
+    font-size: 32px;
+    color: #fff;
+    margin-top: 12px;
+    letter-spacing: 4px;
+  }
+
+  /* ===== TAB NAV ===== */
+  .tab-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 0 auto 50px;
+    max-width: 700px;
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 14px 20px;
+    background: transparent;
+    color: rgba(255,255,255,0.4);
+    border: none;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.4s;
+    position: relative;
+  }
+  .tab-btn:hover { color: rgba(255,255,255,0.7); }
+  .tab-btn.active {
+    color: var(--gold);
+    background: rgba(201,169,110,0.08);
+  }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 20%; right: 20%;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ===== SIGNBOARD CONTAINER ===== */
+  .signboard-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  .sign-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.5;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* ===== OPTION A: 上下分层 ===== */
+  .sign-a {
+    width: 100%;
+    aspect-ratio: 5 / 1;
+    background: var(--black-panel);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .sign-a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(201,169,110,0.03) 0%, transparent 40%);
+  }
+  .sign-a .top-line {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 52px);
+    color: var(--gold);
+    letter-spacing: 16px;
+    text-indent: 16px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 40px rgba(201,169,110,0.15);
+  }
+  .sign-a .divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: clamp(8px, 1.2vw, 18px) 0;
+    position: relative;
+    z-index: 1;
+  }
+  .sign-a .bottom-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(14px, 2vw, 26px);
+    color: var(--gold-light);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    opacity: 0.85;
+  }
+
+  /* ===== OPTION B: 左右组合 ===== */
+  .sign-b {
+    width: 100%;
+    aspect-ratio: 5 / 1;
+    background: var(--black-panel);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(30px, 5vw, 80px);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .sign-b::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(201,169,110,0.02) 0%, transparent 30%, transparent 70%, rgba(201,169,110,0.02) 100%);
+  }
+  .sign-b .cn-text {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 200;
+    font-size: clamp(32px, 5vw, 64px);
+    color: var(--gold);
+    letter-spacing: 20px;
+    text-indent: 20px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 40px rgba(201,169,110,0.12);
+  }
+  .sign-b .v-divider {
+    width: 1px;
+    height: 50%;
+    background: linear-gradient(180deg, transparent, var(--gold), transparent);
+    opacity: 0.4;
+    position: relative;
+    z-index: 1;
+  }
+  .sign-b .en-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(16px, 2.2vw, 30px);
+    color: var(--gold-light);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    opacity: 0.8;
+  }
+
+  /* ===== OPTION C: 融合式 ===== */
+  .sign-c {
+    width: 100%;
+    aspect-ratio: 5 / 1;
+    background: var(--black-panel);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .sign-c::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(201,169,110,0.04) 0%, transparent 60%);
+  }
+  .sign-c .fusion {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: baseline;
+    gap: clamp(12px, 2vw, 30px);
+  }
+  .sign-c .fusion .cn {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 200;
+    font-size: clamp(36px, 5vw, 68px);
+    color: var(--gold);
+    letter-spacing: 12px;
+    text-indent: 12px;
+    text-shadow: 0 0 50px rgba(201,169,110,0.15);
+  }
+  .sign-c .fusion .en {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(14px, 1.8vw, 24px);
+    color: var(--gold-light);
+    letter-spacing: 4px;
+    opacity: 0.7;
+  }
+
+  /* ===== OPTION D: 极简单行 ===== */
+  .sign-d {
+    width: 100%;
+    aspect-ratio: 6 / 1;
+    background: var(--black-panel);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  .sign-d::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(201,169,110,0.02) 0%, transparent 100%);
+  }
+  .sign-d .single-line {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 36px);
+  }
+  .sign-d .single-line .cn {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 300;
+    font-size: clamp(24px, 3.5vw, 48px);
+    color: var(--gold);
+    letter-spacing: 8px;
+    text-indent: 8px;
+  }
+  .sign-d .single-line .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+  .sign-d .single-line .en {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(14px, 2vw, 28px);
+    color: var(--gold-light);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  /* ===== MATERIAL SECTION ===== */
+  .material-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+  .material-section .section-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.5;
+    margin-bottom: 40px;
+  }
+
+  .material-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .material-card {
+    background: var(--black-soft);
+    border: 1px solid rgba(201,169,110,0.1);
+    border-radius: 8px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.4s;
+  }
+  .material-card:hover {
+    border-color: rgba(201,169,110,0.3);
+  }
+  .material-card.recommended {
+    border-color: rgba(201,169,110,0.35);
+  }
+  .material-card.recommended::before {
+    content: '推荐';
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,110,0.3);
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  .material-card h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .material-card .en-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .material-card .desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 20px;
+  }
+
+  .material-card .pros {
+    list-style: none;
+    padding: 0;
+  }
+  .material-card .pros li {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    padding: 5px 0;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .material-card .pros li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 12px;
+  }
+
+  .material-card .cons {
+    list-style: none;
+    padding: 0;
+    margin-top: 8px;
+  }
+  .material-card .cons li {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .material-card .cons li::before {
+    content: '−';
+    position: absolute;
+    left: 0;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ===== FONT COMPARISON ===== */
+  .font-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+  .font-section .section-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.5;
+    margin-bottom: 40px;
+  }
+
+  .font-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    gap: 24px;
+  }
+
+  .font-card {
+    background: var(--black-panel);
+    border: 1px solid rgba(201,169,110,0.08);
+    border-radius: 8px;
+    padding: 40px 36px;
+    text-align: center;
+    transition: border-color 0.4s;
+  }
+  .font-card:hover {
+    border-color: rgba(201,169,110,0.25);
+  }
+
+  .font-card .preview-cn {
+    font-size: 42px;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .font-card .preview-en {
+    font-size: 22px;
+    color: var(--gold-light);
+    opacity: 0.7;
+    margin-bottom: 24px;
+  }
+
+  .font-card .font-info {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .font-card .font-info span {
+    display: block;
+    margin-top: 4px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+    text-transform: none;
+  }
+
+  /* ===== NIGHT PREVIEW ===== */
+  .night-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+  .night-section .section-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.5;
+    margin-bottom: 40px;
+  }
+
+  .night-preview {
+    width: 100%;
+    aspect-ratio: 5 / 1;
+    background: #000;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .night-preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,169,110,0.06) 0%, transparent 50%);
+  }
+  .night-preview .glow-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 4vw, 52px);
+    color: var(--gold-bright);
+    letter-spacing: 16px;
+    text-indent: 16px;
+    text-shadow:
+      0 0 10px rgba(255,215,0,0.6),
+      0 0 30px rgba(201,169,110,0.4),
+      0 0 60px rgba(201,169,110,0.2);
+    position: relative;
+    z-index: 1;
+    animation: glow-pulse 3s ease-in-out infinite alternate;
+  }
+  .night-preview .glow-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+    margin: 12px 0;
+    box-shadow: 0 0 8px rgba(255,215,0,0.4);
+    position: relative;
+    z-index: 1;
+  }
+  .night-preview .glow-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(14px, 2vw, 26px);
+    color: var(--gold-light);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    text-shadow:
+      0 0 8px rgba(232,213,163,0.5),
+      0 0 20px rgba(201,169,110,0.3);
+    position: relative;
+    z-index: 1;
+    opacity: 0.85;
+    animation: glow-pulse 3s ease-in-out infinite alternate 0.5s;
+  }
+
+  @keyframes glow-pulse {
+    0% { opacity: 0.85; }
+    100% { opacity: 1; }
+  }
+
+  /* ===== COMPARISON TABLE ===== */
+  .compare-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+  }
+  .compare-section .section-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.5;
+    margin-bottom: 40px;
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .compare-table th, .compare-table td {
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(201,169,110,0.08);
+  }
+  .compare-table th {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+  .compare-table td {
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+  .compare-table tr:hover td {
+    background: rgba(201,169,110,0.03);
+  }
+  .compare-table .highlight {
+    color: var(--gold);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .font-grid { grid-template-columns: 1fr; }
+    .material-grid { grid-template-columns: 1fr; }
+    .tab-btn { font-size: 11px; padding: 12px 10px; letter-spacing: 1px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Signage Redesign Proposal</h1>
+  <h2>百川 · Bar The Ocean</h2>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+  <button class="tab-btn active" data-tab="layouts">排版方案</button>
+  <button class="tab-btn" data-tab="materials">材料方案</button>
+  <button class="tab-btn" data-tab="fonts">字体对比</button>
+  <button class="tab-btn" data-tab="night">夜间效果</button>
+  <button class="tab-btn" data-tab="compare">新旧对比</button>
+</div>
+
+<!-- TAB: LAYOUTS -->
+<div class="tab-content active" id="tab-layouts">
+  <div class="signboard-section">
+
+    <!-- Option A -->
+    <div class="sign-label">方案 A · 上下分层</div>
+    <div class="sign-a">
+      <div class="top-line">百川</div>
+      <div class="divider"></div>
+      <div class="bottom-line">Bar The Ocean</div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:16px;line-height:1.8;max-width:600px;margin-left:auto;margin-right:auto;">
+      中文居上、英文居下，中间以金色细线分隔。<br>
+      层次清晰，视觉重心稳定，适合宽幅招牌。
+    </p>
+
+    <div style="height:60px"></div>
+
+    <!-- Option B -->
+    <div class="sign-label">方案 B · 左右对称</div>
+    <div class="sign-b">
+      <div class="cn-text">百川</div>
+      <div class="v-divider"></div>
+      <div class="en-text">Bar The Ocean</div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:16px;line-height:1.8;max-width:600px;margin-left:auto;margin-right:auto;">
+      中英文左右并置，中间以竖线分隔。<br>
+      对称感强，适合入口正上方的横向招牌。
+    </p>
+
+    <div style="height:60px"></div>
+
+    <!-- Option C -->
+    <div class="sign-label">方案 C · 融合式</div>
+    <div class="sign-c">
+      <div class="fusion">
+        <div class="cn">百川</div>
+        <div class="en">Bar The Ocean</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:16px;line-height:1.8;max-width:600px;margin-left:auto;margin-right:auto;">
+      中文大字为主、英文斜体小字为辅，无分隔线。<br>
+      整体感最强，现代轻奢风格，适合追求简洁的场合。
+    </p>
+
+    <div style="height:60px"></div>
+
+    <!-- Option D -->
+    <div class="sign-label">方案 D · 极简单行</div>
+    <div class="sign-d">
+      <div class="single-line">
+        <div class="cn">百川</div>
+        <div class="dot"></div>
+        <div class="en">Bar The Ocean</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:16px;line-height:1.8;max-width:600px;margin-left:auto;margin-right:auto;">
+      中英文同一行，以圆点分隔。<br>
+      最简洁的方案，招牌可以做得更窄更长，适合现代极简风格。
+    </p>
+
+  </div>
+</div>
+
+<!-- TAB: MATERIALS -->
+<div class="tab-content" id="tab-materials">
+  <div class="material-section">
+    <div class="section-title">Recommended Materials</div>
+    <div class="material-grid">
+
+      <!-- Card 1 -->
+      <div class="material-card recommended">
+        <h3>拉丝不锈钢 + 背发光</h3>
+        <div class="en-name">Brushed Stainless Steel + Backlit</div>
+        <div class="desc">
+          底板采用 304 拉丝不锈钢（黑钛镀色），字体采用不锈钢精工字背发光。整体无拼接缝，表面致密不积灰。
+        </div>
+        <ul class="pros">
+          <li>表面光滑致密，不易积灰，雨天自洁</li>
+          <li>整板成型，无拼接缝隙</li>
+          <li>背发光均匀柔和，无区域性断电问题</li>
+          <li>黑钛拉丝质感高级，耐刮耐磨</li>
+          <li>使用寿命 10 年以上</li>
+        </ul>
+        <ul class="cons">
+          <li>造价略高于铁板烤漆（约高 30-50%）</li>
+        </ul>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="material-card recommended">
+        <h3>铝塑板 + LED 树脂字</h3>
+        <div class="en-name">Aluminum Composite + LED Resin Letters</div>
+        <div class="desc">
+          底板采用 4mm 铝塑板（哑光黑），字体采用 LED 树脂发光字。铝塑板重量轻、平整度高、耐候性强。
+        </div>
+        <ul class="pros">
+          <li>重量轻，安装方便，对墙体负担小</li>
+          <li>表面平整无接缝，哑光黑质感好</li>
+          <li>树脂字发光均匀，防水防尘 IP65</li>
+          <li>性价比高，施工周期短</li>
+        </ul>
+        <ul class="cons">
+          <li>抗冲击性不如不锈钢</li>
+          <li>长期暴晒可能轻微褪色（5-8 年）</li>
+        </ul>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="material-card">
+        <h3>亚克力 + 迷你字</h3>
+        <div class="en-name">Acrylic + Mini LED Letters</div>
+        <div class="desc">
+          底板采用黑色亚克力板，字体采用迷你发光字（正面发光）。亚克力表面光洁如镜，适合精致风格。
+        </div>
+        <ul class="pros">
+          <li>表面极度光滑，完全不积灰</li>
+          <li>迷你字体积小、精致，适合小字号</li>
+          <li>整体通透感强，现代感足</li>
+        </ul>
+        <ul class="cons">
+          <li>亚克力易划伤，需定期维护</li>
+          <li>户外耐候性一般，3-5 年可能发黄</li>
+          <li>抗风压能力较弱</li>
+        </ul>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="material-card">
+        <h3>岩板 / 烧结板</h3>
+        <div class="en-name">Sintered Stone Panel</div>
+        <div class="desc">
+          底板采用黑色岩板（烧结板），字体采用铜字或不锈钢字。岩板是当下高端商业空间的新宠材料。
+        </div>
+        <ul class="pros">
+          <li>质感顶级，类似天然石材但更均匀</li>
+          <li>零吸水、零渗透，永不积灰变色</li>
+          <li>耐高温、抗紫外线，户外寿命极长</li>
+          <li>差异化强，市面上极少使用</li>
+        </ul>
+        <ul class="cons">
+          <li>造价最高（约为铝塑板的 2-3 倍）</li>
+          <li>重量大，需要加固安装结构</li>
+          <li>加工难度高，需要专业团队</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TAB: FONTS -->
+<div class="tab-content" id="tab-fonts">
+  <div class="font-section">
+    <div class="section-title">Typography Comparison</div>
+    <div class="font-grid">
+
+      <div class="font-card">
+        <div class="preview-cn" style="font-family:'Noto Serif SC';font-weight:200;">百川</div>
+        <div class="preview-en" style="font-family:'Cormorant Garamond';font-weight:300;">Bar The Ocean</div>
+        <div class="font-info">
+          思源宋体 Light + Cormorant Garamond Light
+          <span>纤细优雅，适合轻奢酒吧定位</span>
+        </div>
+      </div>
+
+      <div class="font-card">
+        <div class="preview-cn" style="font-family:'Noto Serif SC';font-weight:600;">百川</div>
+        <div class="preview-en" style="font-family:'Playfair Display';font-weight:700;">Bar The Ocean</div>
+        <div class="font-info">
+          思源宋体 Bold + Playfair Display Bold
+          <span>厚重有力，视觉冲击强，远距离识别好</span>
+        </div>
+      </div>
+
+      <div class="font-card">
+        <div class="preview-cn" style="font-family:'Noto Sans SC';font-weight:100;">百川</div>
+        <div class="preview-en" style="font-family:'Cormorant Garamond';font-weight:300;font-style:italic;">Bar The Ocean</div>
+        <div class="font-info">
+          思源黑体 UltraLight + Cormorant Italic
+          <span>极致纤细，现代极简，适合高端定位</span>
+        </div>
+      </div>
+
+      <div class="font-card">
+        <div class="preview-cn" style="font-family:'Noto Serif SC';font-weight:300;">百川</div>
+        <div class="preview-en" style="font-family:'Cormorant Garamond';font-weight:300;font-style:italic;">Bar The Ocean</div>
+        <div class="font-info">
+          思源宋体 Light + Cormorant Italic
+          <span>中文端庄 + 英文灵动，中西融合最佳</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TAB: NIGHT -->
+<div class="tab-content" id="tab-night">
+  <div class="night-section">
+    <div class="section-title">Night Effect Preview</div>
+    <div class="night-preview">
+      <div class="glow-cn">百川</div>
+      <div class="glow-divider"></div>
+      <div class="glow-en">Bar The Ocean</div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:20px;line-height:1.8;max-width:600px;margin-left:auto;margin-right:auto;">
+      模拟背发光效果：金色光晕从字体背后透出，柔和均匀。<br>
+      背发光方案彻底解决水晶字区域性断电变暗的问题，<br>
+      LED 灯带整条布置，单颗损坏不影响整体效果。
+    </p>
+
+    <div style="height:40px"></div>
+
+    <div class="night-preview" style="aspect-ratio:5/1.2;">
+      <div style="position:relative;z-index:1;display:flex;align-items:center;gap:clamp(16px,2.5vw,36px);">
+        <div style="font-family:'Noto Serif SC';font-weight:300;font-size:clamp(24px,3.5vw,48px);color:var(--gold-bright);letter-spacing:8px;text-shadow:0 0 10px rgba(255,215,0,0.6),0 0 30px rgba(201,169,110,0.4),0 0 60px rgba(201,169,110,0.2);animation:glow-pulse 3s ease-in-out infinite alternate;">百川</div>
+        <div style="width:4px;height:4px;border-radius:50%;background:var(--gold-bright);box-shadow:0 0 8px rgba(255,215,0,0.5);opacity:0.6;"></div>
+        <div style="font-family:'Cormorant Garamond';font-weight:300;font-style:italic;font-size:clamp(14px,1.8vw,24px);color:var(--gold-light);letter-spacing:4px;text-shadow:0 0 8px rgba(232,213,163,0.5),0 0 20px rgba(201,169,110,0.3);opacity:0.85;animation:glow-pulse 3s ease-in-out infinite alternate 0.5s;">Bar The Ocean</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);margin-top:20px;line-height:1.8;max-width:600px;margin-left:auto;margin-right:auto;">
+      方案 D 单行版夜间效果：更紧凑，适合窄幅招牌。
+    </p>
+  </div>
+</div>
+
+<!-- TAB: COMPARE -->
+<div class="tab-content" id="tab-compare">
+  <div class="compare-section">
+    <div class="section-title">Before vs After</div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>对比项</th>
+          <th>现有方案</th>
+          <th>推荐新方案</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>底板材料</td>
+          <td>铁板 + 黑色烤漆（拼接）</td>
+          <td class="highlight">304 黑钛拉丝不锈钢（整板）</td>
+        </tr>
+        <tr>
+          <td>积灰问题</td>
+          <td>烤漆面粗糙，易积灰显脏</td>
+          <td class="highlight">拉丝面致密光滑，雨天自洁</td>
+        </tr>
+        <tr>
+          <td>拼接缝隙</td>
+          <td>多块拼接，缝隙明显</td>
+          <td class="highlight">整板定制，零接缝</td>
+        </tr>
+        <tr>
+          <td>字体工艺</td>
+          <td>水晶字（易区域性断电）</td>
+          <td class="highlight">不锈钢背发光字（均匀柔和）</td>
+        </tr>
+        <tr>
+          <td>表面质感</td>
+          <td>普通烤漆，质感一般</td>
+          <td class="highlight">黑钛拉丝，金属质感高级</td>
+        </tr>
+        <tr>
+          <td>内容</td>
+          <td>百川 + LOGO + COCKTAIL&CRAFT BEER&WHISKY</td>
+          <td class="highlight">百川 · Bar The Ocean（精简）</td>
+        </tr>
+        <tr>
+          <td>配色</td>
+          <td>黑底 + 金字</td>
+          <td class="highlight">黑钛底 + 金色字（延续并升级）</td>
+        </tr>
+        <tr>
+          <td>预计寿命</td>
+          <td>3-5 年</td>
+          <td class="highlight">10 年以上</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
